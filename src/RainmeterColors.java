@@ -42,20 +42,34 @@ public class RainmeterColors extends JFrame
         panelHolder = new Component[i][j];
         pane.setLayout(new GridLayout(i, j, 5,5));
 
-        panelHolder[0][0] = new JLabel("Vark Title");
-        panelHolder[1][0] = new JLabel("Vark Subtitle");
-        panelHolder[2][0] = new JLabel("Day Name");
-        panelHolder[3][0] = new JLabel("Day Number");
-        panelHolder[4][0] = new JLabel("Month");
-        panelHolder[5][0] = new JLabel("Binary Clock 0");
-        panelHolder[6][0] = new JLabel("Binary Clock Hour 1");
-        panelHolder[7][0] = new JLabel("Binary Clock Minute 1");
-        panelHolder[8][0] = new JLabel("Binary Clock Second 1");
-        panelHolder[9][0] = new JLabel("Fountian 1");
-        panelHolder[10][0] = new JLabel("Fountian 2");
-        panelHolder[11][0] = new JLabel("Temperature");
-        panelHolder[12][0] = new JLabel("Weather");
+        panelHolder[0][0] = new JLabel("Vark Title", SwingConstants.CENTER);
+        panelHolder[1][0] = new JLabel("Vark Subtitle", SwingConstants.CENTER);
+        panelHolder[2][0] = new JLabel("Day Name", SwingConstants.CENTER);
+        panelHolder[3][0] = new JLabel("Day Number", SwingConstants.CENTER);
+        panelHolder[4][0] = new JLabel("Month", SwingConstants.CENTER);
+        panelHolder[5][0] = new JLabel("Binary Clock 0", SwingConstants.CENTER);
+        panelHolder[6][0] = new JLabel("Binary Clock Hour 1", SwingConstants.CENTER);
+        panelHolder[7][0] = new JLabel("Binary Clock Minute 1", SwingConstants.CENTER);
+        panelHolder[8][0] = new JLabel("Binary Clock Second 1", SwingConstants.CENTER);
+        panelHolder[9][0] = new JLabel("Fountian 1", SwingConstants.CENTER);
+        panelHolder[10][0] = new JLabel("Fountian 2", SwingConstants.CENTER);
+        panelHolder[11][0] = new JLabel("Temperature", SwingConstants.CENTER);
+        panelHolder[12][0] = new JLabel("Weather", SwingConstants.CENTER);
         panelHolder[13][0] = saveButton;
+
+        varkTitleBox.setHorizontalAlignment(SwingConstants.CENTER);
+        varkSubBox.setHorizontalAlignment(SwingConstants.CENTER);
+        dayNameBox.setHorizontalAlignment(SwingConstants.CENTER);
+        dayNumBox.setHorizontalAlignment(SwingConstants.CENTER);
+        monthBox.setHorizontalAlignment(SwingConstants.CENTER);
+        binary0Box.setHorizontalAlignment(SwingConstants.CENTER);
+        binaryHr1Box.setHorizontalAlignment(SwingConstants.CENTER);
+        binaryMin1Box.setHorizontalAlignment(SwingConstants.CENTER);
+        binarySec1Box.setHorizontalAlignment(SwingConstants.CENTER);
+        fountian1Box.setHorizontalAlignment(SwingConstants.CENTER);
+        fountian2Box.setHorizontalAlignment(SwingConstants.CENTER);
+        tempBox.setHorizontalAlignment(SwingConstants.CENTER);
+        weatherBox.setHorizontalAlignment(SwingConstants.CENTER);
 
         panelHolder[0][1] = varkTitleBox;
         panelHolder[1][1] = varkSubBox;
@@ -90,6 +104,9 @@ public class RainmeterColors extends JFrame
             newSettings.readGui(panelHolder);
             newSettings.writeFiles(currentSettings);
             currentSettings.readGui(panelHolder);
+            currentSettings.setData(newSettings.varkData, newSettings.dateData,
+                        newSettings.binaryData, newSettings.fountianData,
+                        newSettings.weatherData);
             currentSettings.updateGui(panelHolder);
         });
 
@@ -98,7 +115,8 @@ public class RainmeterColors extends JFrame
             originalSettings.writeFiles(currentSettings);
             currentSettings.readGui(panelHolder);
             currentSettings.setData(originalSettings.varkData, originalSettings.dateData,
-                    originalSettings.binaryData, originalSettings.fountianData, originalSettings.weatherData);
+                        originalSettings.binaryData, originalSettings.fountianData,
+                        originalSettings.weatherData);
             originalSettings.updateGui(panelHolder);
         });
 

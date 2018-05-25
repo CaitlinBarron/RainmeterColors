@@ -360,6 +360,22 @@ public class Table
             writer = new BufferedWriter(new FileWriter(varkFile));
             writer.write(varkData.toString());
             writer.close();
+
+            writer = new BufferedWriter(new FileWriter(dateFile));
+            writer.write(dateData.toString());
+            writer.close();
+
+            writer = new BufferedWriter(new FileWriter(binaryFile));
+            writer.write(binaryData.toString());
+            writer.close();
+
+            writer = new BufferedWriter(new FileWriter(fountianFile));
+            writer.write(fountianData.toString());
+            writer.close();
+
+            writer = new BufferedWriter(new FileWriter(weatherFile));
+            writer.write(weatherData.toString());
+            writer.close();
         }
         catch (Exception ex)
         {
@@ -369,7 +385,8 @@ public class Table
 
     public void replace(Table currentSettings)
     {
-        int start, stop;
+        int start = 0;
+        int stop = 0;
         String oldText = null;
         String newText = null;
         StringBuffer data = null;
@@ -382,84 +399,152 @@ public class Table
                     oldText = currentSettings.varkTitle;
                     newText = this.varkTitle;
                     data = this.varkData;
+                    //start and stop values set below after switch
                     break;
 
                 case 1:
                     oldText = currentSettings.varkSub;
                     newText = this.varkSub;
                     data = this.varkData;
+                    start = data.indexOf("Color2=") + 7;
+                    stop = start + oldText.length();
                     break;
 
                 case 2:
                     oldText = currentSettings.dayName;
                     newText = this.dayName;
                     data = this.dateData;
+                    start = data.indexOf("Y=130\r\nFontColor=") + 17;
+                    stop = start + oldText.length();
                     break;
 
                 case 3:
                     oldText = currentSettings.dayNum;
                     newText = this.dayNum;
                     data = this.dateData;
+                    start = data.indexOf("Y=80\r\nFontColor=") + 16;
+                    stop = start + oldText.length();
                     break;
 
                 case 4:
                     oldText = currentSettings.month;
                     newText = this.month;
                     data = this.dateData;
+                    start = data.indexOf("Y=60\r\nFontColor=") + 16;
+                    stop = start + oldText.length();
                     break;
 
                 case 5:
                     oldText = currentSettings.binary0;
                     newText = this.binary0;
                     data = this.binaryData;
+                    //start and stop values set below after switch
                     break;
 
                 case 6:
                     oldText = currentSettings.binaryHr1;
                     newText = this.binaryHr1;
                     data = this.binaryData;
+                    start = data.indexOf("Hour1=") + 6;
+                    stop = start + oldText.length();
                     break;
 
                 case 7:
                     oldText = currentSettings.binaryMin1;
                     newText = this.binaryMin1;
                     data = this.binaryData;
+                    start = data.indexOf("Min1=") + 5;
+                    stop = start + oldText.length();
                     break;
 
                 case 8:
                     oldText = currentSettings.binarySec1;
                     newText = this.binarySec1;
                     data = this.binaryData;
+                    start = data.indexOf("Sec1=") + 5;
+                    stop = start + oldText.length();
                     break;
 
                 case 9:
                     oldText = currentSettings.fountian1;
                     newText = this.fountian1;
                     data = this.fountianData;
+                    start = data.indexOf("PaletteColor1=") + 14;
+                    stop = start + oldText.length();
                     break;
 
                 case 10:
                     oldText = currentSettings.fountian2;
                     newText = this.fountian2;
                     data = this.fountianData;
+                    start = data.indexOf("PaletteColor2=") + 14;
+                    stop = start + oldText.length();
                     break;
 
                 case 11:
                     oldText = currentSettings.temp;
                     newText = this.temp;
                     data = this.weatherData;
+                    start = data.indexOf("Color1=") + 7;
+                    stop = start + oldText.length();
                     break;
 
                 case 12:
                     oldText = currentSettings.weather;
                     newText = this.weather;
                     data = this.weatherData;
+                    start = data.indexOf("Color2=") + 7;
+                    stop = start + oldText.length();
                     break;
             }
 
-            start = data.indexOf(oldText);
-            stop = start + oldText.length();
-            data.replace(start, stop, newText);
+            if (i == 0)
+            {
+                start = data.indexOf("Color1=") + 7;
+                stop = start + oldText.length();
+                System.out.print("before: " + data.substring(start, stop) + " after: ");
+                data.replace(start, stop, newText);
+                System.out.print(data.substring(start, stop) + "\n");
+
+                start = data.indexOf("Color3=") + 7;
+                stop = start + oldText.length();
+                System.out.print("before: " + data.substring(start, stop) + " after: ");
+                data.replace(start, stop, newText);
+                System.out.print(data.substring(start, stop) + "\n");
+            }
+            else if (i == 5)
+            {
+                start = data.indexOf("Hour0=") + 6;
+                stop = start + oldText.length();
+                System.out.print("before: " + data.substring(start, stop) + " after: ");
+                data.replace(start, stop, newText);
+                System.out.print(data.substring(start, stop) + "\n");
+
+                start = data.indexOf("Min0=") + 5;
+                stop = start + oldText.length();
+                System.out.print("before: " + data.substring(start, stop) + " after: ");
+                data.replace(start, stop, newText);
+                System.out.print(data.substring(start, stop) + "\n");
+
+                start = data.indexOf("Sec0=") + 5;
+                stop = start + oldText.length();
+                System.out.print("before: " + data.substring(start, stop) + " after: ");
+                data.replace(start, stop, newText);
+                System.out.print(data.substring(start, stop) + "\n");
+            }
+            else
+            {
+                System.out.print("before: " + data.substring(start, stop) + " after: ");
+                data.replace(start, stop, newText);
+                System.out.print(data.substring(start, stop) + "\n");
+            }
+
         }
+        System.out.print("\n\n");
+        //System.out.println("\n" + varkData.toString() + "\n");
+        //System.out.println("\n" + dateData.toString() + "\n");
+        //System.out.println("\n" + binaryData.toString() + "\n");
+        //System.out.println("\n" + fountianData.toString() + "\n");
+        //System.out.println("\n" + weatherData.toString() + "\n");
     }
 }
