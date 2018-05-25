@@ -1,3 +1,5 @@
+import javafx.scene.control.Tab;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,26 +10,27 @@ public class RainmeterColors extends JFrame
 {
     private static RainmeterColors _instance;
 
-    public Container pane;
-    public Table oldSettings;
-    public Table newSettings;
-    public Component[][] panelHolder;
+    private Container pane;
+    private Table originalSettings;
+    private Table newSettings;
+    private Table currentSettings;
+    private Component[][] panelHolder;
 
-    public JButton saveButton = new JButton("Save");
-    public JButton cancelButton = new JButton("Cancel");
-    public JTextField varkTitleBox = new JTextField(" - ");
-    public JTextField varkSubBox = new JTextField(" - ");
-    public JTextField dayNameBox = new JTextField(" - ");
-    public JTextField dayNumBox = new JTextField(" - ");
-    public JTextField monthBox = new JTextField(" - ");
-    public JTextField binary0Box = new JTextField(" - ");
-    public JTextField binaryHr1Box = new JTextField(" - ");
-    public JTextField binaryMin1Box = new JTextField(" - ");
-    public JTextField binarySec1Box = new JTextField(" - ");
-    public JTextField fountian1Box = new JTextField(" - ");
-    public JTextField fountian2Box = new JTextField(" - ");
-    public JTextField tempBox = new JTextField(" - ");
-    public JTextField weatherBox = new JTextField(" - ");
+    private JButton saveButton = new JButton("Save");
+    private JButton cancelButton = new JButton("Cancel");
+    private JTextField varkTitleBox = new JTextField(" - ");
+    private JTextField varkSubBox = new JTextField(" - ");
+    private JTextField dayNameBox = new JTextField(" - ");
+    private JTextField dayNumBox = new JTextField(" - ");
+    private JTextField monthBox = new JTextField(" - ");
+    private JTextField binary0Box = new JTextField(" - ");
+    private JTextField binaryHr1Box = new JTextField(" - ");
+    private JTextField binaryMin1Box = new JTextField(" - ");
+    private JTextField binarySec1Box = new JTextField(" - ");
+    private JTextField fountian1Box = new JTextField(" - ");
+    private JTextField fountian2Box = new JTextField(" - ");
+    private JTextField tempBox = new JTextField(" - ");
+    private JTextField weatherBox = new JTextField(" - ");
 
     public RainmeterColors()
     {
@@ -69,13 +72,35 @@ public class RainmeterColors extends JFrame
         panelHolder[12][1] = weatherBox;
         panelHolder[13][1] = cancelButton;
 
-        oldSettings = new Table();
-        newSettings = new Table();
-        oldSettings.readFiles(panelHolder);
+        originalSettings = new Table();
+        newSettings = new Table(originalSettings);
+        currentSettings = new Table(originalSettings);
 
-        //add action listeners for buttons?
-        saveButton.addActionListener(e->{newSettings.writeFiles(panelHolder, true);});
-        cancelButton.addActionListener(e->{oldSettings.writeFiles(panelHolder, false);});
+        originalSettings.readFiles();
+
+        originalSettings.updateGui(panelHolder);
+
+        newSettings.readGui(panelHolder);
+        currentSettings.readGui(panelHolder);
+
+
+        //add action listeners for buttons
+        saveButton.addActionListener(e->
+        {
+            newSettings.readGui(panelHolder);
+            newSettings.writeFiles(currentSettings);
+            currentSettings.readGui(panelHolder);
+            currentSettings.updateGui(panelHolder);
+        });
+
+        cancelButton.addActionListener(e->
+        {
+            originalSettings.writeFiles(currentSettings);
+            currentSettings.readGui(panelHolder);
+            currentSettings.setData(originalSettings.varkData, originalSettings.dateData,
+                    originalSettings.binaryData, originalSettings.fountianData, originalSettings.weatherData);
+            originalSettings.updateGui(panelHolder);
+        });
 
 
         for (int m = 0; m < i; m++)

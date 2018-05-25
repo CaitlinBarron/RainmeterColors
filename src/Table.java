@@ -13,15 +13,19 @@ public class Table
 {
     public String varkTitle;
     public String varkSub;
+
     public String dayName;
     public String dayNum;
     public String month;
+
     public String binary0;
     public String binaryHr1;
     public String binaryMin1;
     public String binarySec1;
+
     public String fountian1;
     public String fountian2;
+
     public String temp;
     public String weather;
 
@@ -31,30 +35,61 @@ public class Table
     private String fountianFile = "C:\\Users\\Caitlin\\Documents\\misc\\Rainmeter\\Skins\\Fountain of Colors\\@Resources\\Variables.inc";
     private String weatherFile = "C:\\Users\\Caitlin\\Documents\\misc\\Rainmeter\\Skins\\raleway\\Variables\\globalvariables.inc";
 
-    private StringBuffer varkData = new StringBuffer();
-    private StringBuffer dateData = new StringBuffer();
-    private StringBuffer binaryData = new StringBuffer();
-    private StringBuffer fountianData = new StringBuffer();
-    private StringBuffer weatherData = new StringBuffer();
+    public StringBuffer varkData = new StringBuffer();
+    public StringBuffer dateData = new StringBuffer();
+    public StringBuffer binaryData = new StringBuffer();
+    public StringBuffer fountianData = new StringBuffer();
+    public StringBuffer weatherData = new StringBuffer();
 
     public Table()
     {
         varkTitle = "";
         varkSub = "";
+
         dayName = "";
         dayNum = "";
         month = "";
+
         binary0 = "";
         binaryHr1 = "";
         binaryMin1 = "";
         binarySec1 = "";
+
         fountian1 = "";
         fountian2 = "";
+
         temp = "";
         weather = "";
     }
 
-    public boolean readFiles(Component[][] panelHolder)
+    public Table(Table old)
+    {
+        this.varkData = old.varkData;
+        this.dateData = old.dateData;
+        this.binaryData = old.binaryData;
+        this.fountianData = old.fountianData;
+        this.weatherData = old.weatherData;
+
+        this.varkTitle = old.varkTitle;
+        this.varkSub = old.varkSub;
+
+        this.dayName = old.dayName;
+        this.dayNum = old.dayNum;
+        this.month = old.month;
+
+        this.binary0 = old.binary0;
+        this.binaryHr1 = old.binaryHr1;
+        this.binaryMin1 = old.binaryMin1;
+        this.binarySec1 = old.binarySec1;
+
+        this.fountian1 = old.fountian1;
+        this.fountian2 = old.fountian2;
+
+        this.temp = old.temp;
+        this.weather = old.weather;
+    }
+
+    public boolean readFiles()
     {
         boolean retval = true;
         int i = 1;
@@ -168,9 +203,83 @@ public class Table
             retval = false;
         }
 
-        updateGui(panelHolder);
-
         return retval;
+    }
+
+    public void readGui(Component[][] panelHolder)
+    {
+        JTextField editBox = null;
+        for (int i = 0; i < 13; i++)
+        {
+            if(panelHolder[i][1] instanceof JTextField)
+            {
+                editBox = (JTextField) panelHolder[i][1];
+            }
+            switch (i)
+            {
+                case 0:
+                    varkTitle = editBox.getText();
+                    break;
+
+                case 1:
+                    varkSub = editBox.getText();
+                    break;
+
+                case 2:
+                    dayName = editBox.getText();
+                    break;
+
+                case 3:
+                    dayNum = editBox.getText();
+                    break;
+
+                case 4:
+                    month = editBox.getText();
+                    break;
+
+                case 5:
+                    binary0 = editBox.getText();
+                    break;
+
+                case 6:
+                    binaryHr1 = editBox.getText();
+                    break;
+
+                case 7:
+                    binaryMin1 = editBox.getText();
+                    break;
+
+                case 8:
+                    binarySec1 = editBox.getText();
+                    break;
+
+                case 9:
+                    fountian1 = editBox.getText();
+                    break;
+
+                case 10:
+                    fountian2 = editBox.getText();
+                    break;
+
+                case 11:
+                    temp = editBox.getText();
+                    break;
+
+                case 12:
+                    weather = editBox.getText();
+                    break;
+            }
+        }
+    }
+
+    public void setData (StringBuffer vark, StringBuffer date,
+                         StringBuffer binary, StringBuffer fountian, StringBuffer weather)
+    {
+        this.varkData = vark;
+        this.dateData = date;
+        this.binaryData = binary;
+        this.fountianData = fountian;
+        this.weatherData = weather;
     }
 
     public void updateGui(Component[][] panelHolder)
@@ -185,70 +294,66 @@ public class Table
             switch (i)
             {
                 case 0:
-                    editBox.setText(varkTitle);
+                    editBox.setText(this.varkTitle);
                     break;
 
                 case 1:
-                    editBox.setText(varkSub);
+                    editBox.setText(this.varkSub);
                     break;
 
                 case 2:
-                    editBox.setText(dayName);
+                    editBox.setText(this.dayName);
                     break;
 
                 case 3:
-                    editBox.setText(dayNum);
+                    editBox.setText(this.dayNum);
                     break;
 
                 case 4:
-                    editBox.setText(month);
+                    editBox.setText(this.month);
                     break;
 
                 case 5:
-                    editBox.setText(binary0);
+                    editBox.setText(this.binary0);
                     break;
 
                 case 6:
-                    editBox.setText(binaryHr1);
+                    editBox.setText(this.binaryHr1);
                     break;
 
                 case 7:
-                    editBox.setText(binaryMin1);
+                    editBox.setText(this.binaryMin1);
                     break;
 
                 case 8:
-                    editBox.setText(binarySec1);
+                    editBox.setText(this.binarySec1);
                     break;
 
                 case 9:
-                    editBox.setText(fountian1);
+                    editBox.setText(this.fountian1);
                     break;
 
                 case 10:
-                    editBox.setText(fountian2);
+                    editBox.setText(this.fountian2);
                     break;
 
                 case 11:
-                    editBox.setText(temp);
+                    editBox.setText(this.temp);
                     break;
 
                 case 12:
-                    editBox.setText(weather);
+                    editBox.setText(this.weather);
                     break;
             }
         }
     }
 
-    public void writeFiles(Component[][] panelHolder, Boolean newVold)
+    public void writeFiles(Table currentSettings)
     {
         int i = 1;
         BufferedWriter writer = null;
 
-        if (newVold == true)
-        {
-            replace(panelHolder);
-        }
-
+        replace(currentSettings);
 
         try
         {
@@ -262,92 +367,99 @@ public class Table
         }
     }
 
-    public void replace(Component[][] panelHolder)
+    public void replace(Table currentSettings)
     {
         int start, stop;
         String oldText = null;
-        JTextField editBox = null;
+        String newText = null;
         StringBuffer data = null;
 
         for (int i = 0; i < 13; i++)
         {
-            if(panelHolder[i][1] instanceof JTextField)
-            {
-                editBox = (JTextField) panelHolder[i][1];
-            }
-
             switch (i)
             {
                 case 0:
-                    oldText = varkTitle;
-                    data = varkData;
+                    oldText = currentSettings.varkTitle;
+                    newText = this.varkTitle;
+                    data = this.varkData;
                     break;
 
                 case 1:
-                    oldText = varkSub;
-                    data = varkData;
+                    oldText = currentSettings.varkSub;
+                    newText = this.varkSub;
+                    data = this.varkData;
                     break;
 
                 case 2:
-                    oldText = dayName;
-                    data = dateData;
+                    oldText = currentSettings.dayName;
+                    newText = this.dayName;
+                    data = this.dateData;
                     break;
 
                 case 3:
-                    oldText = dayNum;
-                    data = dateData;
+                    oldText = currentSettings.dayNum;
+                    newText = this.dayNum;
+                    data = this.dateData;
                     break;
 
                 case 4:
-                    oldText = month;
-                    data = dateData;
+                    oldText = currentSettings.month;
+                    newText = this.month;
+                    data = this.dateData;
                     break;
 
                 case 5:
-                    oldText = binary0;
-                    data = binaryData;
+                    oldText = currentSettings.binary0;
+                    newText = this.binary0;
+                    data = this.binaryData;
                     break;
 
                 case 6:
-                    oldText = binaryHr1;
-                    data = binaryData;
+                    oldText = currentSettings.binaryHr1;
+                    newText = this.binaryHr1;
+                    data = this.binaryData;
                     break;
 
                 case 7:
-                    oldText = binaryMin1;
-                    data = binaryData;
+                    oldText = currentSettings.binaryMin1;
+                    newText = this.binaryMin1;
+                    data = this.binaryData;
                     break;
 
                 case 8:
-                    oldText = binarySec1;
-                    data = binaryData;
+                    oldText = currentSettings.binarySec1;
+                    newText = this.binarySec1;
+                    data = this.binaryData;
                     break;
 
                 case 9:
-                    oldText = fountian1;
-                    data = fountianData;
+                    oldText = currentSettings.fountian1;
+                    newText = this.fountian1;
+                    data = this.fountianData;
                     break;
 
                 case 10:
-                    oldText = fountian2;
-                    data = fountianData;
+                    oldText = currentSettings.fountian2;
+                    newText = this.fountian2;
+                    data = this.fountianData;
                     break;
 
                 case 11:
-                    oldText = temp;
-                    data = weatherData;
+                    oldText = currentSettings.temp;
+                    newText = this.temp;
+                    data = this.weatherData;
                     break;
 
                 case 12:
-                    oldText = weather;
-                    data = weatherData;
+                    oldText = currentSettings.weather;
+                    newText = this.weather;
+                    data = this.weatherData;
                     break;
             }
 
             start = data.indexOf(oldText);
             stop = start + oldText.length();
-            data.replace(start, stop, editBox.getText());
+            data.replace(start, stop, newText);
         }
     }
-
 }
