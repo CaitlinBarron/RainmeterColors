@@ -1,4 +1,8 @@
+import javax.swing.*;
+import java.awt.*;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -50,7 +54,7 @@ public class Table
         weather = "";
     }
 
-    public boolean readFiles()
+    public boolean readFiles(Component[][] panelHolder)
     {
         boolean retval = true;
         int i = 1;
@@ -164,6 +168,186 @@ public class Table
             retval = false;
         }
 
+        updateGui(panelHolder);
+
         return retval;
     }
+
+    public void updateGui(Component[][] panelHolder)
+    {
+        JTextField editBox = null;
+        for (int i = 0; i < 13; i++)
+        {
+            if(panelHolder[i][1] instanceof JTextField)
+            {
+                editBox = (JTextField) panelHolder[i][1];
+            }
+            switch (i)
+            {
+                case 0:
+                    editBox.setText(varkTitle);
+                    break;
+
+                case 1:
+                    editBox.setText(varkSub);
+                    break;
+
+                case 2:
+                    editBox.setText(dayName);
+                    break;
+
+                case 3:
+                    editBox.setText(dayNum);
+                    break;
+
+                case 4:
+                    editBox.setText(month);
+                    break;
+
+                case 5:
+                    editBox.setText(binary0);
+                    break;
+
+                case 6:
+                    editBox.setText(binaryHr1);
+                    break;
+
+                case 7:
+                    editBox.setText(binaryMin1);
+                    break;
+
+                case 8:
+                    editBox.setText(binarySec1);
+                    break;
+
+                case 9:
+                    editBox.setText(fountian1);
+                    break;
+
+                case 10:
+                    editBox.setText(fountian2);
+                    break;
+
+                case 11:
+                    editBox.setText(temp);
+                    break;
+
+                case 12:
+                    editBox.setText(weather);
+                    break;
+            }
+        }
+    }
+
+    public void writeFiles(Component[][] panelHolder, Boolean newVold)
+    {
+        int i = 1;
+        BufferedWriter writer = null;
+
+        if (newVold == true)
+        {
+            replace(panelHolder);
+        }
+
+
+        try
+        {
+            writer = new BufferedWriter(new FileWriter(varkFile));
+            writer.write(varkData.toString());
+            writer.close();
+        }
+        catch (Exception ex)
+        {
+            System.out.println("error: " + ex.getMessage());
+        }
+    }
+
+    public void replace(Component[][] panelHolder)
+    {
+        int start, stop;
+        String oldText = null;
+        JTextField editBox = null;
+        StringBuffer data = null;
+
+        for (int i = 0; i < 13; i++)
+        {
+            if(panelHolder[i][1] instanceof JTextField)
+            {
+                editBox = (JTextField) panelHolder[i][1];
+            }
+
+            switch (i)
+            {
+                case 0:
+                    oldText = varkTitle;
+                    data = varkData;
+                    break;
+
+                case 1:
+                    oldText = varkSub;
+                    data = varkData;
+                    break;
+
+                case 2:
+                    oldText = dayName;
+                    data = dateData;
+                    break;
+
+                case 3:
+                    oldText = dayNum;
+                    data = dateData;
+                    break;
+
+                case 4:
+                    oldText = month;
+                    data = dateData;
+                    break;
+
+                case 5:
+                    oldText = binary0;
+                    data = binaryData;
+                    break;
+
+                case 6:
+                    oldText = binaryHr1;
+                    data = binaryData;
+                    break;
+
+                case 7:
+                    oldText = binaryMin1;
+                    data = binaryData;
+                    break;
+
+                case 8:
+                    oldText = binarySec1;
+                    data = binaryData;
+                    break;
+
+                case 9:
+                    oldText = fountian1;
+                    data = fountianData;
+                    break;
+
+                case 10:
+                    oldText = fountian2;
+                    data = fountianData;
+                    break;
+
+                case 11:
+                    oldText = temp;
+                    data = weatherData;
+                    break;
+
+                case 12:
+                    oldText = weather;
+                    data = weatherData;
+                    break;
+            }
+
+            start = data.indexOf(oldText);
+            stop = start + oldText.length();
+            data.replace(start, stop, editBox.getText());
+        }
+    }
+
 }
