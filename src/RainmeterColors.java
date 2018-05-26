@@ -40,7 +40,7 @@ public class RainmeterColors extends JFrame
         int i = 14;
         int j = 2;
         panelHolder = new Component[i][j];
-        pane.setLayout(new GridLayout(i, j, 5,5));
+        pane.setLayout(new GridLayout(i, j, 5, 5));
 
         panelHolder[0][0] = new JLabel("Vark Title", SwingConstants.CENTER);
         panelHolder[1][0] = new JLabel("Vark Subtitle", SwingConstants.CENTER);
@@ -87,10 +87,11 @@ public class RainmeterColors extends JFrame
         panelHolder[13][1] = cancelButton;
 
         originalSettings = new Table();
+        originalSettings.readFiles();
+        originalSettings.writeFiles(originalSettings);
+
         newSettings = new Table(originalSettings);
         currentSettings = new Table(originalSettings);
-
-        originalSettings.readFiles();
 
         originalSettings.updateGui(panelHolder);
 

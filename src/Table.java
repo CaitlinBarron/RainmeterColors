@@ -102,11 +102,17 @@ public class Table
             {
                 if (i == 11)
                 {
-                    varkTitle = line.substring(7);
+                    varkTitle = threeDigitClean(line.substring(7));
+                    line = line.substring(0, 7) + varkTitle;
                 }
                 else if (i == 12)
                 {
-                    varkSub = line.substring(7);
+                    varkSub = threeDigitClean(line.substring(7));
+                    line = line.substring(0, 7) + varkSub;
+                }
+                else if (i == 13)
+                {
+                    line = line.substring(0, 7) + varkTitle;
                 }
 
                 varkData.append(line).append("\r\n");
@@ -120,15 +126,18 @@ public class Table
             {
                 if (i == 48)
                 {
-                    dayName = line.substring(10);
+                    dayName = threeDigitClean(line.substring(10));
+                    line = line.substring(0, 10) + dayName;
                 }
                 else if (i == 33)
                 {
-                    dayNum = line.substring(10);
+                    dayNum = threeDigitClean(line.substring(10));
+                    line = line.substring(0, 10) + dayNum;
                 }
                 else if (i == 63)
                 {
-                    month = line.substring(10);
+                    month = threeDigitClean(line.substring(10));
+                    line = line.substring(0, 10) + month;
                 }
 
                 dateData.append(line).append("\r\n");
@@ -142,19 +151,31 @@ public class Table
             {
                 if (i == 3)
                 {
-                    binary0 = line.substring(6);
+                    binary0 = threeDigitClean(line.substring(6));
+                    line = line.substring(0, 6) + binary0;
                 }
                 else if (i == 4)
                 {
-                    binaryHr1 = line.substring(6);
+                    binaryHr1 = threeDigitClean(line.substring(6));
+                    line = line.substring(0, 6) + binaryHr1;
+                }
+                else if (i == 6)
+                {
+                    line = line.substring(0, 5) + binary0;
                 }
                 else if (i == 7)
                 {
-                    binaryMin1 = line.substring(5);
+                    binaryMin1 = threeDigitClean(line.substring(5));
+                    line = line.substring(0, 5) + binaryMin1;
+                }
+                else if (i == 9)
+                {
+                    line = line.substring(0, 5) + binary0;
                 }
                 else if (i == 10)
                 {
-                    binarySec1 = line.substring(5);
+                    binarySec1 = threeDigitClean(line.substring(5));
+                    line = line.substring(0, 5) + binarySec1;
                 }
 
                 binaryData.append(line).append("\r\n");
@@ -168,11 +189,13 @@ public class Table
             {
                 if (i == 40)
                 {
-                    fountian1 = line.substring(14);
+                    fountian1 = threeDigitClean(line.substring(14));
+                    line = line.substring(0, 14) + fountian1;
                 }
                 else if (i == 41)
                 {
-                    fountian2 = line.substring(14);
+                    fountian2 = threeDigitClean(line.substring(14));
+                    line = line.substring(0, 14) + fountian2;
                 }
 
                 fountianData.append(line).append("\r\n");
@@ -186,11 +209,13 @@ public class Table
             {
                 if (i == 62)
                 {
-                    temp = line.substring(7);
+                    temp = threeDigitClean(line.substring(7));
+                    line = line.substring(0, 7) + temp;
                 }
                 else if (i == 63)
                 {
-                    weather = line.substring(7);
+                    weather = threeDigitClean(line.substring(7));
+                    line = line.substring(0, 7) + weather;
                 }
                 weatherData.append(line).append("\r\n");
                 i++;
@@ -218,55 +243,55 @@ public class Table
             switch (i)
             {
                 case 0:
-                    varkTitle = editBox.getText();
+                    varkTitle = threeDigitClean(editBox.getText());
                     break;
 
                 case 1:
-                    varkSub = editBox.getText();
+                    varkSub = threeDigitClean(editBox.getText());
                     break;
 
                 case 2:
-                    dayName = editBox.getText();
+                    dayName = threeDigitClean(editBox.getText());
                     break;
 
                 case 3:
-                    dayNum = editBox.getText();
+                    dayNum = threeDigitClean(editBox.getText());
                     break;
 
                 case 4:
-                    month = editBox.getText();
+                    month = threeDigitClean(editBox.getText());
                     break;
 
                 case 5:
-                    binary0 = editBox.getText();
+                    binary0 = threeDigitClean(editBox.getText());
                     break;
 
                 case 6:
-                    binaryHr1 = editBox.getText();
+                    binaryHr1 = threeDigitClean(editBox.getText());
                     break;
 
                 case 7:
-                    binaryMin1 = editBox.getText();
+                    binaryMin1 = threeDigitClean(editBox.getText());
                     break;
 
                 case 8:
-                    binarySec1 = editBox.getText();
+                    binarySec1 = threeDigitClean(editBox.getText());
                     break;
 
                 case 9:
-                    fountian1 = editBox.getText();
+                    fountian1 = threeDigitClean(editBox.getText());
                     break;
 
                 case 10:
-                    fountian2 = editBox.getText();
+                    fountian2 = threeDigitClean(editBox.getText());
                     break;
 
                 case 11:
-                    temp = editBox.getText();
+                    temp = threeDigitClean(editBox.getText());
                     break;
 
                 case 12:
-                    weather = editBox.getText();
+                    weather = threeDigitClean(editBox.getText());
                     break;
             }
         }
@@ -294,55 +319,55 @@ public class Table
             switch (i)
             {
                 case 0:
-                    editBox.setText(this.varkTitle);
+                    editBox.setText(threeDigitClean(this.varkTitle));
                     break;
 
                 case 1:
-                    editBox.setText(this.varkSub);
+                    editBox.setText(threeDigitClean(this.varkSub));
                     break;
 
                 case 2:
-                    editBox.setText(this.dayName);
+                    editBox.setText(threeDigitClean(this.dayName));
                     break;
 
                 case 3:
-                    editBox.setText(this.dayNum);
+                    editBox.setText(threeDigitClean(this.dayNum));
                     break;
 
                 case 4:
-                    editBox.setText(this.month);
+                    editBox.setText(threeDigitClean(this.month));
                     break;
 
                 case 5:
-                    editBox.setText(this.binary0);
+                    editBox.setText(threeDigitClean(this.binary0));
                     break;
 
                 case 6:
-                    editBox.setText(this.binaryHr1);
+                    editBox.setText(threeDigitClean(this.binaryHr1));
                     break;
 
                 case 7:
-                    editBox.setText(this.binaryMin1);
+                    editBox.setText(threeDigitClean(this.binaryMin1));
                     break;
 
                 case 8:
-                    editBox.setText(this.binarySec1);
+                    editBox.setText(threeDigitClean(this.binarySec1));
                     break;
 
                 case 9:
-                    editBox.setText(this.fountian1);
+                    editBox.setText(threeDigitClean(this.fountian1));
                     break;
 
                 case 10:
-                    editBox.setText(this.fountian2);
+                    editBox.setText(threeDigitClean(this.fountian2));
                     break;
 
                 case 11:
-                    editBox.setText(this.temp);
+                    editBox.setText(threeDigitClean(this.temp));
                     break;
 
                 case 12:
-                    editBox.setText(this.weather);
+                    editBox.setText(threeDigitClean(this.weather));
                     break;
             }
         }
@@ -502,49 +527,92 @@ public class Table
             {
                 start = data.indexOf("Color1=") + 7;
                 stop = start + oldText.length();
-                System.out.print("before: " + data.substring(start, stop) + " after: ");
-                data.replace(start, stop, newText);
-                System.out.print(data.substring(start, stop) + "\n");
+                //System.out.print("before: " + data.substring(start, stop) + " after: ");
+                data.replace(start, stop, threeDigitClean(newText));
+                //System.out.print(data.substring(start, stop) + "\n");
 
                 start = data.indexOf("Color3=") + 7;
                 stop = start + oldText.length();
-                System.out.print("before: " + data.substring(start, stop) + " after: ");
-                data.replace(start, stop, newText);
-                System.out.print(data.substring(start, stop) + "\n");
+                //System.out.print("before: " + data.substring(start, stop) + " after: ");
+                data.replace(start, stop, threeDigitClean(newText));
+                //System.out.print(data.substring(start, stop) + "\n");
             }
             else if (i == 5)
             {
                 start = data.indexOf("Hour0=") + 6;
                 stop = start + oldText.length();
-                System.out.print("before: " + data.substring(start, stop) + " after: ");
-                data.replace(start, stop, newText);
-                System.out.print(data.substring(start, stop) + "\n");
+                //System.out.print("before: " + data.substring(start, stop) + " after: ");
+                data.replace(start, stop, threeDigitClean(newText));
+                //System.out.print(data.substring(start, stop) + "\n");
 
                 start = data.indexOf("Min0=") + 5;
                 stop = start + oldText.length();
-                System.out.print("before: " + data.substring(start, stop) + " after: ");
-                data.replace(start, stop, newText);
-                System.out.print(data.substring(start, stop) + "\n");
+                //System.out.print("before: " + data.substring(start, stop) + " after: ");
+                data.replace(start, stop, threeDigitClean(newText));
+                //System.out.print(data.substring(start, stop) + "\n");
 
                 start = data.indexOf("Sec0=") + 5;
                 stop = start + oldText.length();
-                System.out.print("before: " + data.substring(start, stop) + " after: ");
-                data.replace(start, stop, newText);
-                System.out.print(data.substring(start, stop) + "\n");
+                //System.out.print("before: " + data.substring(start, stop) + " after: ");
+                data.replace(start, stop, threeDigitClean(newText));
+                //System.out.print(data.substring(start, stop) + "\n");
             }
             else
             {
-                System.out.print("before: " + data.substring(start, stop) + " after: ");
-                data.replace(start, stop, newText);
-                System.out.print(data.substring(start, stop) + "\n");
+                //System.out.print("before: " + data.substring(start, stop) + " after: ");
+                data.replace(start, stop, threeDigitClean(newText));
+                //System.out.print(data.substring(start, stop) + "\n");
             }
 
         }
-        System.out.print("\n\n");
+        //System.out.print("\n\n");
         //System.out.println("\n" + varkData.toString() + "\n");
         //System.out.println("\n" + dateData.toString() + "\n");
         //System.out.println("\n" + binaryData.toString() + "\n");
         //System.out.println("\n" + fountianData.toString() + "\n");
         //System.out.println("\n" + weatherData.toString() + "\n");
+    }
+
+    public String threeDigitClean (String original)
+    {
+        String retval = "";
+        int temp = 0;
+        String val = "";
+
+        val = original.replace(" ", "");
+        String[] splitStr = val.split(",");
+        for (int i = 0; i < splitStr.length; i++)
+        {
+            val = splitStr[i];
+            temp = val.length();
+
+            if (Integer.parseInt(val) > 255)
+            {
+                val = "255";
+            }
+
+            if (temp == 0)
+            {
+                val = "000";
+            }
+            else if (temp == 1)
+            {
+                val = ("00" + val);
+            }
+            else if (temp == 2)
+            {
+                val = ("0" + val);
+            }
+            else if (temp > 3)
+            {
+                val = val.substring(temp-3, temp);
+            }
+
+            splitStr[i] = val;
+        }
+
+        retval = splitStr[0] + ", " + splitStr[1] + ", " + splitStr[2] + ", " + splitStr[3];
+
+        return retval;
     }
 }
