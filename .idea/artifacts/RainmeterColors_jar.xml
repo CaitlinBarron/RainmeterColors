@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="RainmeterColors:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/RainmeterColors_jar</output-path>
+    <root id="archive" name="RainmeterColors.jar">
+      <element id="module-output" name="RainmeterColors" />
+    </root>
+  </artifact>
+</component>
